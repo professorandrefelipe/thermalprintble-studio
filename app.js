@@ -1,7 +1,7 @@
 let blocks = [
-  { id: 1, type: 'text', content: 'LABORATÓRIO DE ENSAIOS', align: 'center', scale: 2, bold: true, italic: false, underline: false },
+  { id: 1, type: 'text', content: 'LABORATÓRIO DE ENSAIOS', align: 'center', scale: 2, bold: true, italic: false, underline: false, fontFamily: 'monospace' },
   { id: 2, type: 'rectangle', width: 320, height: 30, thickness: 2, align: 'center' },
-  { id: 3, type: 'text', content: 'STATUS: OK', align: 'center', scale: 2, bold: true, italic: false, underline: false },
+  { id: 3, type: 'text', content: 'STATUS: OK', align: 'center', scale: 2, bold: true, italic: false, underline: false, fontFamily: 'monospace' },
   { id: 4, type: 'cut', feedLines: 100 }
 ];
 
@@ -18,6 +18,7 @@ function addBlock(type) {
     block.bold = false;
     block.italic = false;
     block.underline = false;
+    block.fontFamily = 'monospace'; // Fonte padrão estilo cupão
   } else if (type === 'rectangle') {
     block.width = 300; block.height = 40; block.thickness = 2; block.align = 'center';
   } else if (type === 'circle') {
@@ -76,8 +77,9 @@ function renderPaper() {
       let textDecoration = b.underline ? 'underline' : 'none';
       let fontStyle = b.italic ? 'italic' : 'normal';
       let fontWeight = b.bold ? 'bold' : 'normal';
+      let fontFamily = b.fontFamily || 'monospace';
 
-      div.innerHTML = `<div style="text-align: ${b.align}; font-size: ${fontSize}px; font-weight: ${fontWeight}; font-style: ${fontStyle}; text-decoration: ${textDecoration}; word-break: break-word;">${b.content}</div>`;
+      div.innerHTML = `<div style="text-align: ${b.align}; font-size: ${fontSize}px; font-weight: ${fontWeight}; font-style: ${fontStyle}; text-decoration: ${textDecoration}; font-family: ${fontFamily}; word-break: break-word;">${b.content}</div>`;
     } 
     else if (b.type === 'rectangle') {
       const alignFlex = b.align === 'center' ? 'center' : (b.align === 'right' ? 'flex-end' : 'flex-start');
@@ -118,7 +120,15 @@ function renderInspector() {
         <textarea oninput="updateSelectedBlock('content', this.value)">${block.content}</textarea>
       </div>
       <div class="form-group">
-        <label>Tamanho da Fonte (Scale)</label>
+        <label>Família da Fonte</label>
+        <select onchange="updateSelectedBlock('fontFamily', this.value)">
+          <option value="monospace" ${block.fontFamily === 'monospace' ? 'selected' : ''}>Impressora (Monospaçada)</option>
+          <option value="sans-serif" ${block.fontFamily === 'sans-serif' ? 'selected' : ''}>Moderna (Sem Serifa)</option>
+          <option value="serif" ${block.fontFamily === 'serif' ? 'selected' : ''}>Clássica (Com Serifa)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tamanho (Scale)</label>
         <select onchange="updateSelectedBlock('scale', parseInt(this.value))">
           <option value="1" ${block.scale === 1 ? 'selected' : ''}>1x (Pequena)</option>
           <option value="2" ${block.scale === 2 ? 'selected' : ''}>2x (Média)</option>
