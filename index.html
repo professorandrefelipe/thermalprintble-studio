@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ThermalPrintBLE Studio</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Biblioteca para converter a bobina HTML em PNG -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
@@ -19,23 +18,34 @@
     </div>
   </header>
 
-  <main class="editor-container">
-    <!-- Painel Lateral: Adicionar Blocos -->
-    <aside class="sidebar">
+  <main class="studio-layout">
+    <!-- PAINEL DA ESQUERDA: FERRAMENTAS -->
+    <aside class="panel sidebar-left">
       <h3>Adicionar Blocos</h3>
-      <button onclick="addBlock('text')">📝 Texto</button>
-      <button onclick="addBlock('rectangle')">🔲 Retângulo</button>
+      <button onclick="addBlock('text')">📝 Bloco de Texto</button>
+      <button onclick="addBlock('rectangle')">🔲 Quadrilátero</button>
       <button onclick="addBlock('circle')">⚪ Círculo</button>
       <button onclick="addBlock('triangle')">🔺 Triângulo</button>
       <button onclick="addBlock('cut')">✂️ Corte de Papel</button>
     </aside>
 
-    <!-- Visualização da Bobina (384px) -->
-    <section class="receipt-preview">
-      <div id="paper" class="paper">
-        <!-- Blocos renderizados via JS -->
+    <!-- CENTRO: CANVAS DA BOBINA DE PAPEL -->
+    <section class="receipt-viewport">
+      <div class="paper-container">
+        <div class="paper-header">BOBINA (384px)</div>
+        <div id="paper" class="paper">
+          <!-- Blocos renderizados aqui -->
+        </div>
       </div>
     </section>
+
+    <!-- PAINEL DA DIREITA: INSPECTOR DE PROPRIEDADES -->
+    <aside class="panel sidebar-right" id="inspector">
+      <h3>Inspector de Propriedades</h3>
+      <div id="inspector-content">
+        <p class="placeholder-text">Selecione um bloco na bobina para editar suas propriedades.</p>
+      </div>
+    </aside>
   </main>
 
   <script src="app.js"></script>
