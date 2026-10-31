@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThermalPrintBLE Studio</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Biblioteca para converter a bobina HTML em PNG -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>ThermalPrintBLE Studio <small>v2.5.0</small></h1>
+    </div>
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="exportImage()">📷 Salvar PNG</button>
+      <button class="btn btn-primary" onclick="exportIno()">💻 Exportar .INO</button>
+    </div>
+  </header>
+
+  <main class="editor-container">
+    <!-- Painel Lateral: Adicionar Blocos -->
+    <aside class="sidebar">
+      <h3>Adicionar Blocos</h3>
+      <button onclick="addBlock('text')">📝 Texto</button>
+      <button onclick="addBlock('rectangle')">🔲 Retângulo</button>
+      <button onclick="addBlock('circle')">⚪ Círculo</button>
+      <button onclick="addBlock('triangle')">🔺 Triângulo</button>
+      <button onclick="addBlock('cut')">✂️ Corte de Papel</button>
+    </aside>
+
+    <!-- Visualização da Bobina (384px) -->
+    <section class="receipt-preview">
+      <div id="paper" class="paper">
+        <!-- Blocos renderizados via JS -->
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
