@@ -1,53 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ThermalPrintBLE Studio</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThermalPrintBLE Studio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <h1>ThermalPrintBLE Studio <small>v2.5.0</small></h1>
-    </div>
-    <div class="actions">
-      <button class="btn btn-secondary" onclick="exportImage()">📷 Salvar PNG</button>
-      <button class="btn btn-primary" onclick="exportIno()">💻 Exportar .INO</button>
-    </div>
-  </header>
-
-  <main class="studio-layout">
-    <!-- PAINEL DA ESQUERDA: FERRAMENTAS -->
-    <aside class="panel sidebar-left">
-      <h3>Adicionar Blocos</h3>
-      <button onclick="addBlock('text')">📝 Bloco de Texto</button>
-      <button onclick="addBlock('rectangle')">🔲 Quadrilátero</button>
-      <button onclick="addBlock('circle')">⚪ Círculo</button>
-      <button onclick="addBlock('triangle')">🔺 Triângulo</button>
-      <button onclick="addBlock('cut')">✂️ Corte de Papel</button>
-    </aside>
-
-    <!-- CENTRO: CANVAS DA BOBINA DE PAPEL -->
-    <section class="receipt-viewport">
-      <div class="paper-container">
-        <div class="paper-header">BOBINA (384px)</div>
-        <div id="paper" class="paper">
-          <!-- Blocos renderizados aqui -->
+    <div class="container">
+        <h1>🖨️ ThermalPrintBLE Studio</h1>
+        <p>Gerador de código Arduino compatível com a biblioteca V2.6.3+</p>
+        
+        <div class="control-group">
+            <label for="macInput">Endereço MAC da Impressora:</label>
+            <input type="text" id="macInput" value="25:00:13:00:08:ef" placeholder="00:11:22:33:44:55">
         </div>
-      </div>
-    </section>
 
-    <!-- PAINEL DA DIREITA: INSPECTOR DE PROPRIEDADES -->
-    <aside class="panel sidebar-right" id="inspector">
-      <h3>Inspector de Propriedades</h3>
-      <div id="inspector-content">
-        <p class="placeholder-text">Selecione um bloco na bobina para editar suas propriedades.</p>
-      </div>
-    </aside>
-  </main>
+        <div class="control-group">
+            <label for="imageInput">Selecione uma Imagem para Converter:</label>
+            <input type="file" id="imageInput" accept="image/*">
+        </div>
 
-  <script src="app.js"></script>
+        <div class="preview-container">
+            <p>Preview da Impressão (Redimensionado e Dithering P&B):</p>
+            <canvas id="previewCanvas"></canvas>
+        </div>
+
+        <button onclick="downloadIno()" id="btnDownload" disabled>Baixar Código (.ino)</button>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
